@@ -14,3 +14,15 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.answer-card {
+    cursor: pointer;
+}
+
+.answer-card:hover {
+    background-color: rgba(250, 225, 225, 0.5);
+}
+
+.bg-danger, .bg-success {
+    color: #ffffff;
+}
