@@ -15,7 +15,7 @@ function init() {
 function showQuestion(currentQuestion) {
     if (currentQuestion >= questions.length) {
         document.querySelector(".progress-bar").innerHTML = `100 %`;
-        document.querySelector(".progress-bar").style.width = `100 %`;
+        document.querySelector(".progress-bar").style.width = `100%`;
 
         document.getElementById("endScreen").classList.toggle("d_none");
         document.getElementById("startScreen").classList.toggle("d_none");
@@ -64,4 +64,14 @@ function nextQuestion() {
     }
 
     showQuestion(currentQuestion);
+}
+
+function restartGame() {
+    currentQuestion = 0;
+    rightQuestion = 0;
+
+    showQuestion(currentQuestion);
+
+    document.getElementById("endScreen").classList.toggle("d_none");
+    document.getElementById("startScreen").classList.toggle("d_none");
 }
