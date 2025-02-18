@@ -1,4 +1,5 @@
 let currentQuestion = 0;
+let rightQuestion = 0;
 
 function init() {
     let maxNum = document.querySelectorAll(".max-count");
@@ -13,12 +14,21 @@ function init() {
 
 function showQuestion(currentQuestion) {
     if (currentQuestion >= questions.length) {
+        document.querySelector(".progress-bar").innerHTML = `100 %`;
+        document.querySelector(".progress-bar").style.width = `100 %`;
+
         document.getElementById("endScreen").classList.toggle("d_none");
         document.getElementById("startScreen").classList.toggle("d_none");
+
+        document.getElementById("right-questions").innerHTML = rightQuestion;
     } else {
         let question = questions[currentQuestion];
 
         document.getElementById('curr-count').innerHTML = currentQuestion +1;
+
+        let percent = Math.round((currentQuestion / questions.length)*100);
+        document.querySelector(".progress-bar").innerHTML = `${percent} %`;
+        document.querySelector(".progress-bar").style.width = `${percent}%`;
 
         document.getElementById("questiontext").innerHTML = question['question'];
         document.getElementById("answer_1").innerHTML = question['answer_1'];
@@ -34,6 +44,7 @@ function answer(answer) {
     let selectedQuestionNumber = answer.slice(-1);
 
     if (selectedQuestionNumber == question['right_answer']) {
+        rightQuestion++;
         document.getElementById(answer).parentNode.classList.add('bg-success');
     } else {
         document.getElementById(answer).parentNode.classList.add('bg-danger');

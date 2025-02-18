@@ -21,10 +21,15 @@
     <div class="container">
         <div class="card quiz-card">
             <img class="card-img-top" src="assets/quiz.png" alt="Card image cap">
+
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">25%</div>
+            </div>
+
             <div class="card-body" id="endScreen">
                 <div>Quiz beendet!</div>
                 <img>
-                <div>Du hast <b>x</b> von <b class="max-count">x</b> Fragen richtig beantwortet.</div>
+                <div>Du hast <b id="right-questions">x</b> von <b class="max-count">x</b> Fragen richtig beantwortet.</div>
             </div>
 
             <div class="card-body" id="startScreen">
