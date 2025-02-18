@@ -1,3 +1,7 @@
 body {
     background: #007AFF;
 }
+
+.d_none {
+    display: none !important;
+}

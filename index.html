@@ -21,7 +21,13 @@
     <div class="container">
         <div class="card quiz-card">
             <img class="card-img-top" src="assets/quiz.png" alt="Card image cap">
-            <div class="card-body">
+            <div class="card-body" id="endScreen">
+                <div>Quiz beendet!</div>
+                <img>
+                <div>Du hast <b>x</b> von <b class="max-count">x</b> Fragen richtig beantwortet.</div>
+            </div>
+
+            <div class="card-body" id="startScreen">
                 <h5 class="card-title" id="questiontext">Frage</h5>
 
                 <div class="card mb-2 answer-card" onclick="answer('answer_1')">
@@ -49,8 +55,8 @@
                 </div>
 
                 <div class="question-footer">
-                    <span><b>1</b> von <b id="max-count">5</b> Fragen</span>
-                    <button class="btn btn-primary" id="next-button" disabled>Nächste Fragen</button>
+                    <span><b id="curr-count">1</b> von <b class="max-count">5</b> Fragen</span>
+                    <button class="btn btn-primary" id="next-button" onclick="nextQuestion()" disabled>Nächste Fragen</button>
                 </div>
             </div>
         </div>
