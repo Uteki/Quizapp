@@ -10,7 +10,6 @@ function init() {
         num.innerHTML = questions.length;
     })
 
-    document.getElementById("endScreen").classList.add("d_none");
     showQuestion(currentQuestion);
 }
 
@@ -58,6 +57,7 @@ function updateProgress() {
 function answer(answer) {
     let question = questions[currentQuestion];
     let selectedQuestionNumber = answer.slice(-1);
+    if (ifClicked()) return;
 
     if (chosenAnswerBool(selectedQuestionNumber,  question)) {
         rightQuestion++;
@@ -70,6 +70,12 @@ function answer(answer) {
     }
 
     document.getElementById('next-button').disabled = false;
+}
+
+function ifClicked() {
+    return [1, 2, 3, 4].some(i =>
+        document.getElementById(`answer_${i}`).parentNode.classList.contains('bg-success')
+    );
 }
 
 function chosenAnswerBool(selectedQuestionNumber, question) {
