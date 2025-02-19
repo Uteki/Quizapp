@@ -11,42 +11,55 @@ function init() {
     })
 
     document.getElementById("endScreen").classList.add("d_none");
-
     showQuestion(currentQuestion);
 }
 
 function showQuestion(currentQuestion) {
-    if (currentQuestion >= questions.length) {
-        document.querySelector(".progress-bar").innerHTML = `100 %`;
-        document.querySelector(".progress-bar").style.width = `100%`;
-
-        document.getElementById("endScreen").classList.toggle("d_none");
-        document.getElementById("startScreen").classList.toggle("d_none");
-
-        document.getElementById("right-questions").innerHTML = rightQuestion;
+    if (gameOver()) {
+        showEndscreen();
     } else {
-        let question = questions[currentQuestion];
-
-        document.getElementById('curr-count').innerHTML = currentQuestion +1;
-
-        let percent = Math.round((currentQuestion / questions.length)*100);
-        document.querySelector(".progress-bar").innerHTML = `${percent} %`;
-        document.querySelector(".progress-bar").style.width = `${percent}%`;
-
-        document.getElementById("questiontext").innerHTML = question['question'];
-        document.getElementById("answer_1").innerHTML = question['answer_1'];
-        document.getElementById("answer_2").innerHTML = question['answer_2'];
-        document.getElementById("answer_3").innerHTML = question['answer_3'];
-        document.getElementById("answer_4").innerHTML = question['answer_4'];
+        updateProgress();
+        updateScreen();
     }
+}
 
+function gameOver() {
+    return currentQuestion >= questions.length;
+}
+
+function showEndscreen() {
+    document.querySelector(".progress-bar").innerHTML = `100 %`;
+    document.querySelector(".progress-bar").style.width = `100%`;
+
+    document.getElementById("endScreen").classList.toggle("d_none");
+    document.getElementById("startScreen").classList.toggle("d_none");
+
+    document.getElementById("right-questions").innerHTML = rightQuestion;
+}
+
+function updateScreen() {
+    let question = questions[currentQuestion];
+
+    document.getElementById('curr-count').innerHTML = currentQuestion +1;
+    document.getElementById("questiontext").innerHTML = question['question'];
+
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById(`answer_${i}`).innerHTML = question[`answer_${i}`];
+    }
+}
+
+function updateProgress() {
+    let percent = Math.round((currentQuestion / questions.length)*100);
+
+    document.querySelector(".progress-bar").innerHTML = `${percent} %`;
+    document.querySelector(".progress-bar").style.width = `${percent}%`;
 }
 
 function answer(answer) {
     let question = questions[currentQuestion];
     let selectedQuestionNumber = answer.slice(-1);
 
-    if (selectedQuestionNumber == question['right_answer']) {
+    if (chosenAnswerBool(selectedQuestionNumber,  question)) {
         rightQuestion++;
         audioRight.play();
         document.getElementById(answer).parentNode.classList.add('bg-success');
@@ -57,6 +70,10 @@ function answer(answer) {
     }
 
     document.getElementById('next-button').disabled = false;
+}
+
+function chosenAnswerBool(selectedQuestionNumber, question) {
+    return selectedQuestionNumber == question['right_answer'];
 }
 
 function nextQuestion() {
