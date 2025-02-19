@@ -1,6 +1,9 @@
 let currentQuestion = 0;
 let rightQuestion = 0;
 
+let audioRight = new Audio('./assets/sounds/rightanswer.mp3');
+let audioWrong = new Audio('./assets/sounds/wronganswer.mp3');
+
 function init() {
     let maxNum = document.querySelectorAll(".max-count");
     maxNum.forEach(num => {
@@ -45,8 +48,10 @@ function answer(answer) {
 
     if (selectedQuestionNumber == question['right_answer']) {
         rightQuestion++;
+        audioRight.play();
         document.getElementById(answer).parentNode.classList.add('bg-success');
     } else {
+        audioWrong.play();
         document.getElementById(answer).parentNode.classList.add('bg-danger');
         document.getElementById(`answer_` + question['right_answer']).parentNode.classList.add('bg-success');
     }
